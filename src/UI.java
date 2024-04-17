@@ -55,7 +55,7 @@ public class UI {
     }
     public static void PrintIce(){
         EnigmaConfig.cnt.setCursorPosition(60 , 14);
-        System.out.print("Player Ice Amount : " + Player.IceAmount);
+        System.out.print("Player Ice Amount : " + Player.IceAmount+"      ");
     }
 
     public static void PrintInputQueue(){

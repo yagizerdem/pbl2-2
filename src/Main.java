@@ -13,10 +13,10 @@ public class Main  {
     static EnigmaConfig config = new EnigmaConfig();
     static Player player;
 
-
-
     public static void main(String[] args) throws  Exception {
         init();
+//        Computer.span();
+
 
         while (true){
             UI.ClearLayout();
@@ -24,6 +24,10 @@ public class Main  {
                 // listeners
                 if(SD.rkey >=37 && SD.rkey <= 40){
                     player.Move((Directions)Commands.dictionary.get(SD.rkey));
+                }
+                // enter key
+                else if(SD.rkey == 10 && Player.ice == null){
+                    player.ThrowIce();
                 }
             }
             if(canExecuteCommand()){
@@ -37,6 +41,21 @@ public class Main  {
             for(Computer c : Computer.computers){
                 c.Move();
             }
+            // take damage cpu
+            for(Computer c : Computer.computers){
+                c.takeDamage();
+            }
+            // delte eleminated cpu
+            Computer.killCpu();
+
+            if(Player.ice != null && Player.ice.CheckMeltIce()){
+                Player.ice.Melt();
+                Player.ice = null;
+            }
+
+            if(Fire.canRemoveFire()){
+                Fire.removeFire();
+            }
 
             if(Player.Life <= 0){
                 break;
@@ -49,6 +68,7 @@ public class Main  {
         }
         // ending screen
         UI.EndScreen();
+        End(); // read and write hig score txt
     }
 
     public static void init(){
@@ -81,5 +101,15 @@ public class Main  {
         else if(cmd == Commands.SpanComputer){
             Computer.span();
         }
+        else if(cmd == Commands.SpanIce){
+            Ice.span();
+        }
+        else if(cmd == Commands.SpanFire){
+            Fire.span();
+        }
+    }
+
+    public static void End(){
+        //
     }
 }

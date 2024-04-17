@@ -11,7 +11,9 @@ public class Player {
     Character symbol;
     static int  Score = 0;
     static int Life = 1000;
-    static int IceAmount = 0;
+    static int IceAmount = 10;
+
+    static Ice ice = null ;
 
     long timer = System.currentTimeMillis();
     public Player(int row , int col){
@@ -47,6 +49,12 @@ public class Player {
         else if(Maze.board[this.row][this.col] instanceof  Computer){
             flag = false;
         }
+        else if(Maze.board[this.row][this.col].equals(Ice.activeSymbol)){
+            flag = false;
+        }
+        else if(Maze.board[this.row][this.col].equals(Fire.symbol)){
+            flag = false;
+        }
         this.Move(direction , -1);
         return flag;
     }
@@ -69,6 +77,9 @@ public class Player {
             }
             else if((Character)Maze.board[this.row][this.col] =='3'){
                 Player.Score += 30;
+            }
+            else if((Character)Maze.board[this.row][this.col] == Ice.passiveSymbol){
+                Player.IceAmount++;
             }
         }
 
@@ -93,5 +104,24 @@ public class Player {
 
             if(diffrow + diffcol == 1) Player.Life -= 50;
         }
+        // take damage from fire
+        if(Maze.board[this.row+ 1][this.col].equals(Fire.symbol)){
+            Player.Life -= 1;
+        }
+        if(Maze.board[this.row-1][this.col].equals(Fire.symbol)){
+            Player.Life -= 1;
+        }
+        if(Maze.board[this.row][this.col+1].equals(Fire.symbol)){
+            Player.Life -= 1;
+        }
+        if(Maze.board[this.row][this.col-1].equals(Fire.symbol)){
+            Player.Life -= 1;
+        }
+    }
+
+    public void ThrowIce(){
+        if(Player.IceAmount <= 0) return;
+        Player.ice = Ice.Spread(this.row , this.col);
+        Player.IceAmount--;
     }
 }

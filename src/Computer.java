@@ -13,10 +13,13 @@ public class Computer {
 
     long timer = System.currentTimeMillis(); // move timer
 
+    int healt;
+
     Computer(int row , int col){
         this.row = row;
         this.col = col;
         this.target = null;
+        this.healt = 1000;
     }
     public void Move(){
         if(this.target == null){
@@ -170,5 +173,39 @@ public class Computer {
         Maze.board[newComputer.row][newComputer.col] = newComputer;
         Computer.computers.add(newComputer);
         return  newComputer;
+    }
+
+    public boolean canMove(){
+        return this.timer < System.currentTimeMillis();
+    }
+    public void takeDamage(){
+        if(!this.canMove()) return;
+        Object[] items = new Object[]{
+                Maze.board[this.row][this.col-1],
+                Maze.board[this.row][this.col+1],
+                Maze.board[this.row-1][this.col],
+                Maze.board[this.row+1][this.col]
+        };
+        for(Object item : items){
+            if(item instanceof  Character){
+                if((Character) item == '+') {
+                    this.healt -= 1000;
+                };
+            }
+        }
+
+    }
+
+    public static void killCpu(){
+        Iterator<Computer> iterator = Computer.computers.iterator();
+        while (iterator.hasNext()){
+            Computer cpu = iterator.next();
+            if(cpu.healt <= 0){
+                // remov from ui
+                Maze.board[cpu.row][cpu.col] =  ' ';
+                // remove from lsit
+                iterator.remove();
+            };
+        }
     }
 }
