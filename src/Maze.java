@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLOutput;
 import java.util.Random;
 
@@ -10,7 +12,9 @@ public class Maze {
     static Object[][] board = new Object[23][53];
 
     public static void init(){
-        String filePath = "C:\\Users\\yagiz\\Desktop\\pbl2-2\\maxe.txt";
+
+        Path currentPath = Paths.get("").toAbsolutePath();
+        String filePath = currentPath + "\\src\\maze.txt";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;

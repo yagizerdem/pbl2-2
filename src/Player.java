@@ -5,7 +5,7 @@ public class Player {
     static Random rnd = new Random();
     int prevrow;
     int prevcol;
-    int row;
+    int row ;
     int col;
     Directions directions;
     Character symbol;
@@ -14,6 +14,8 @@ public class Player {
     static int IceAmount = 10;
 
     static Ice ice = null ;
+
+    static String PlayerName;
 
     long timer = System.currentTimeMillis();
     public Player(int row , int col){
@@ -87,7 +89,7 @@ public class Player {
     }
 
     public static Player span(){
-        int[]row_col = Maze.findEmptySpace();
+        int[]row_col = Maze.findEmptySpace(); // int [2]{row col}
         Player newPlayer = new Player(row_col[0],row_col[1]);
         Maze.board[newPlayer.row][newPlayer.col] = newPlayer;
         return newPlayer;
