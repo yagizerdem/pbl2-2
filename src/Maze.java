@@ -13,9 +13,7 @@ public class Maze {
 
     public static void init(){
 
-        Path currentPath = Paths.get("").toAbsolutePath();
-        String filePath = currentPath + "\\src\\maze.txt";
-
+        String filePath = "maze.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int row = 0;
