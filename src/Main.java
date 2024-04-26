@@ -21,7 +21,7 @@ public class Main  {
 
     public static void main(String[] args) throws  Exception {
         init();
-//        Computer.span();
+        Computer.span();
 
         // start screen
         Scanner scanner = new Scanner(System.in);
@@ -135,7 +135,7 @@ public class Main  {
 
 //        Path currentPath = Paths.get("").toAbsolutePath();
 //        String filePath = currentPath + "\\src\\HighScores.txt";
-            String filePath = "maze.txt";
+            String filePath = "HighScores.txt";
         List<Node> records = new ArrayList<>();
         Node playerNode = new Node(Player.PlayerName , Player.Score);
         records.add(playerNode);
