@@ -135,7 +135,7 @@ public class Main  {
 
 //        Path currentPath = Paths.get("").toAbsolutePath();
 //        String filePath = currentPath + "\\src\\HighScores.txt";
-            String filePath = "Maze.txt";
+            String filePath = "maze.txt";
         List<Node> records = new ArrayList<>();
         Node playerNode = new Node(Player.PlayerName , Player.Score);
         records.add(playerNode);
